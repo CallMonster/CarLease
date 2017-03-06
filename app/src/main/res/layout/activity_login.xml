@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/icon_loading_logo" />
+
+    <EditText
+        android:id="@+id/userEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_edittext"
+        android:hint="请输入手机号"
+        android:inputType="text"
+        android:maxLines="1"
+        android:text="13012312345"
+        android:padding="15dp"
+        android:textColor="@color/text_black"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/passEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_edittext"
+        android:hint="请输入密码"
+        android:padding="15dp"
+        android:text="123456"
+        android:inputType="textPassword"
+        android:textColor="@color/text_black"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_edittext_focused"
+        android:text="登录"
+        android:textColor="@color/bg_theme_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/forgetPassBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="忘记密码"
+        android:textColor="@color/text_black"
+        android:textSize="14sp" />
+</LinearLayout>

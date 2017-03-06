@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="bg_theme_color">#6ac936</color>
+    <color name="white">#ffffff</color>
+    <color name="text_black">#dd242424</color>
+    <color name="text_grey">#ff777777</color>
+    <color name="text_grey2">#b3b3b3</color>
+    <color name="line_color">#efc6c6c6</color>
+    <color name="nocolor">#00000000</color>
+
+    <color name="border_grey">#BDC7D8</color>
+
+</resources>
