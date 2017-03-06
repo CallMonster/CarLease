@@ -1,6 +1,7 @@
 package com.tj.pxdl.carlease.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -101,12 +102,15 @@ public class LoginActivity extends BaseActivity {
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_from_left);
                 break;
             case R.id.loginBtn:
-                showProgressDialog("");
+                showProgressDialog("请稍后..");
                 String userStr=userEdit.getText().toString().trim();
                 String passStr=passEdit.getText().toString().trim();
                 reqLogin(userStr,passStr);
                 break;
             case R.id.forgetPassBtn:
+                Intent aaa=new Intent(this,AuthActivity.class);
+                startActivity(aaa);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_from_left);
 
                 break;
         }
@@ -131,7 +135,11 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onResponse(String response, int id) {
-                Log.d("login","succ:"+response);
+                Log.d("login","succ:"+id+"---"+response);
+                if(TextUtils.isEmpty(response)){
+                    showTips(getResources().getString(R.string.tip_common_err));
+                    return;
+                }
                 LoginModel loginModel= BaseApplication.gson.fromJson(response,LoginModel.class);
                 if(loginModel.isSuccess()){
                     showTips(getResources().getString(R.string.tip_login));
