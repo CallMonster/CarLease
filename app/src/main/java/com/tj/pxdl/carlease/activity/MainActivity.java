@@ -100,9 +100,13 @@ public class MainActivity extends BaseActivity {
 
                 break;
             case R.id.localBtn:
-                LatLng center = new LatLng(39.086652, 117.121114);
-                MapStatusUpdate mapStatus = MapStatusUpdateFactory.newLatLngZoom(center, 14);
-                mBaiduMap.setMapStatus(mapStatus);
+                if(center!=null){
+                    MapStatusUpdate mapStatus = MapStatusUpdateFactory.newLatLngZoom(center, 14);
+                    mBaiduMap.setMapStatus(mapStatus);
+                    addrView.setText(addrDetail);
+                }else{
+                    showTips("暂无GPS坐标信息");
+                }
                 break;
         }
     }
@@ -115,26 +119,64 @@ public class MainActivity extends BaseActivity {
     private void initMap() {
         mMapView.setVisibility(View.VISIBLE);
         mBaiduMap = mMapView.getMap();
+
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
-        LatLng center = new LatLng(39.086652,117.121114);
-        MapStatusUpdate mapStatus = MapStatusUpdateFactory.newLatLngZoom(center, 14);
-        mBaiduMap.setMapStatus(mapStatus);
-
-        //添加屏幕中心点marker
-        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.mark_location);
-        OverlayOptions option = new MarkerOptions()
-                .position(center)
-                .icon(bitmap);
-        mBaiduMap.addOverlay(option);
 
         //实时获取地图坐标
         mBaiduMap.setOnMapStatusChangeListener(changeListener);
 
+        //获取地图转码
         mSearch = GeoCoder.newInstance();
         mSearch.setOnGetGeoCodeResultListener(listener);
-
+        initLocation();
     }
+
+    public LocationClient mLocationClient;
+    public BDLocationListener myListener;
+    private void initLocation() {
+        myListener = new MyLocationListener();
+        mLocationClient = new LocationClient(getApplicationContext()); // 声明LocationClient类
+        mLocationClient.registerLocationListener(myListener); // 注册监听函数
+        LocationClientOption option = new LocationClientOption();
+        option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度，默认值gcj02
+        option.disableCache(false);
+        option.setIsNeedAddress(true);
+        option.setIsNeedLocationDescribe(true);
+        mLocationClient.setLocOption(option);
+        mLocationClient.start();
+    }
+
+    private LatLng center;
+    private String addrDetail;
+    public class MyLocationListener implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            if (location == null){
+                addrDetail="暂无GPS信息";
+                showTips("暂无GPS信息");
+            } else{
+                Double lat=location.getLatitude();
+                Double lng=location.getLongitude();
+                center = new LatLng(lat,lng);
+                //设置中心位置
+                MapStatusUpdate mapStatus = MapStatusUpdateFactory.newLatLngZoom(center, 14);
+                mBaiduMap.setMapStatus(mapStatus);
+
+                //添加屏幕中心点marker
+                BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.mark_location);
+                OverlayOptions option = new MarkerOptions()
+                        .position(center)
+                        .icon(bitmap);
+                mBaiduMap.addOverlay(option);
+                addrDetail=location.getProvince()+location.getCity()
+                        +location.getDistrict()+location.getStreet();
+                addrView.setText(addrDetail);
+            }
+        }
+    }
+
 
     @TargetApi(Build.VERSION_CODES.M)
     public void showContacts(View view) {
@@ -215,10 +257,11 @@ public class MainActivity extends BaseActivity {
             if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
                 //没有找到检索结果
                 addrView.setText("未找到");
+            }else{
+                String addr=result.getAddressDetail().province+result.getAddressDetail().city
+                        +result.getAddressDetail().district+result.getAddressDetail().street;
+                addrView.setText(addr);
             }
-            String addr=result.getAddressDetail().province+result.getAddressDetail().city
-                    +result.getAddressDetail().district+result.getAddressDetail().street;
-            addrView.setText(addr);
         }
     };
 
