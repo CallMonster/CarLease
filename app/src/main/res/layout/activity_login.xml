@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -14,36 +16,51 @@
         android:layout_marginTop="40dp"
         android:src="@mipmap/icon_loading_logo" />
 
-    <EditText
+    <com.tj.pxdl.carlease.widget.OneKeyClearEditText
         android:id="@+id/userEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/bg_edittext"
+        android:background="@color/nocolor"
         android:hint="请输入手机号"
         android:inputType="text"
         android:maxLines="1"
-        android:text="13012312345"
         android:padding="15dp"
+        android:text="13012312345"
         android:textColor="@color/text_black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:deletecolor="@color/text_grey" />
 
-    <EditText
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/line_color" />
+
+    <com.tj.pxdl.carlease.widget.OneKeyClearEditText
         android:id="@+id/passEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_edittext"
+        android:background="@color/nocolor"
         android:hint="请输入密码"
+        android:inputType="textPassword"
         android:padding="15dp"
         android:text="123456"
-        android:inputType="textPassword"
         android:textColor="@color/text_black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:deletecolor="@color/text_grey" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/line_color" />
 
     <Button
         android:id="@+id/loginBtn"

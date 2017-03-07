@@ -4,4 +4,5 @@
     <string name="regist_accord">注册即表示统一<u>《会员用车协议》</u></string>
     <string name="tip_reg">恭喜您，您已注册成功</string>
     <string name="tip_login">登录成功</string>
+    <string name="tip_common_err">服务器异常，请稍后再试</string>
 </resources>
