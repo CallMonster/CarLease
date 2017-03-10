@@ -5,4 +5,8 @@
     <string name="tip_reg">恭喜您，您已注册成功</string>
     <string name="tip_login">登录成功</string>
     <string name="tip_common_err">服务器异常，请稍后再试</string>
+
+    <string name="tip_couponbtn">兑换</string>
+
+
 </resources>

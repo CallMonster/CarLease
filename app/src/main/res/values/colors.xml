@@ -15,5 +15,6 @@
 
     <color name="border_grey">#BDC7D8</color>
     <color name="bg_grey">#EFE1E1E1</color>
+    <color name="background_grey">#f3f5f9</color>
 
 </resources>

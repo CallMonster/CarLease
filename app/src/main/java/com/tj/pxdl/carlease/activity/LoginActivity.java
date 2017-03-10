@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity {
             }
 
             @Override
-            public void onResponse(String response, int id) {
+            public void onResponse(String response, int id,int resultCode) {
                 Log.d("login","succ:"+id+"---"+response);
                 if(TextUtils.isEmpty(response)){
                     showTips(getResources().getString(R.string.tip_common_err));

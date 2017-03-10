@@ -133,7 +133,7 @@ public class RegistActivity extends BaseActivity {
             }
 
             @Override
-            public void onResponse(String response, int id) {
+            public void onResponse(String response, int id,int resultCode) {
                 Log.d(TAG,"succ:"+response);
                 RegistModel regModel= BaseApplication.gson.fromJson(response,RegistModel.class);
                 if(regModel.isSuccess()){

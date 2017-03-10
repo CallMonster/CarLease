@@ -59,7 +59,8 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="aLMVG036qEfib6PlxYYv3STUcIDPyhMz" />
 
-        <activity android:name=".activity.AuthActivity"></activity>
+        <activity android:name=".activity.AuthActivity" />
+        <activity android:name=".MenuAct.CouponActivity"></activity>
     </application>
 
 </manifest>
