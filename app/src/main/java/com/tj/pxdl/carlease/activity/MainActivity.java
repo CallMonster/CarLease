@@ -18,9 +18,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -49,6 +51,7 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.tj.pxdl.carlease.R;
 import com.tj.pxdl.carlease.base.BaseActivity;
 import com.tj.pxdl.carlease.utils.PermissionUtil;
+import com.tj.pxdl.carlease.widget.scrollmenu.ScrollLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,6 +86,7 @@ public class MainActivity extends BaseActivity {
         } else {
             initMap();
         }
+        initDragView();
     }
 
     @OnClick({R.id.menuBtn, R.id.topLayout, R.id.useCarBtn, R.id.localBtn})
@@ -97,7 +101,7 @@ public class MainActivity extends BaseActivity {
             case R.id.topLayout:
                 break;
             case R.id.useCarBtn:
-
+                mScrollLayout.setToOpen();
                 break;
             case R.id.localBtn:
                 if(center!=null){
@@ -262,6 +266,51 @@ public class MainActivity extends BaseActivity {
                         +result.getAddressDetail().district+result.getAddressDetail().street;
                 addrView.setText(addr);
             }
+        }
+    };
+
+    /************以上为地图*****以下为其它************/
+
+    private ScrollLayout mScrollLayout;
+    private RelativeLayout includeLayout;
+    private void initDragView(){
+        mScrollLayout = (ScrollLayout) findViewById(R.id.scroll_down_layout);
+        mScrollLayout.setOnScrollChangedListener(mOnScrollChangedListener);
+        mScrollLayout.getBackground().setAlpha(0);
+
+        includeLayout= (RelativeLayout) findViewById(R.id.includeLayout);
+        includeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mScrollLayout.getCurrentStatus() == ScrollLayout.Status.OPENED) {
+                    mScrollLayout.scrollToClose();
+                }
+            }
+        });
+
+    }
+
+    private ScrollLayout.OnScrollChangedListener mOnScrollChangedListener = new ScrollLayout.OnScrollChangedListener() {
+        @Override
+        public void onScrollProgressChanged(float currentProgress) {
+            if(currentProgress >= 0) {
+                float precent = 255 * currentProgress;
+                if (precent > 255) {
+                    precent = 255;
+                } else if (precent < 0) {
+                    precent = 0;
+                }
+                mScrollLayout.getBackground().setAlpha(255 - (int) precent);
+            }
+        }
+
+        @Override
+        public void onScrollFinished(ScrollLayout.Status currentStatus) {
+            if (currentStatus.equals(ScrollLayout.Status.EXIT)) {}
+        }
+
+        @Override
+        public void onChildScroll(int top) {
         }
     };
 

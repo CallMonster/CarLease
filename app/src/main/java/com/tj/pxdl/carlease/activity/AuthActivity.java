@@ -20,6 +20,10 @@ public class AuthActivity extends BaseActivity {
     private final int IMAGE_TAG_USER=2;
     private final int IMAGE_TAG_PAPER=3;
 
+    private String DRIVE_IMAGE_PATH;
+    private String USER_IMAGE_PATH;
+    private String PAPER_IMAGE_PATH;
+
     @BindView(R.id.title) TextView title;
     @BindView(R.id.userEdit) OneKeyClearEditText userEdit;
     @BindView(R.id.idEdit) OneKeyClearEditText idEdit;
@@ -67,17 +71,18 @@ public class AuthActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == SystemAlbumPickerActivity.resultCode_SINGLE_PATH && requestCode == IMAGE_TAG_DRIVE) {
-            String imgPath = data.getStringExtra(SystemAlbumPickerActivity.key_singlePath);
-            drivePhoto.setImageBitmap(ImageUtils.getimage(imgPath));
+            DRIVE_IMAGE_PATH = data.getStringExtra(SystemAlbumPickerActivity.key_singlePath);
+            drivePhoto.setImageBitmap(ImageUtils.getimage(DRIVE_IMAGE_PATH));
             driveTipView.setVisibility(View.GONE);
         }else if(resultCode == SystemAlbumPickerActivity.resultCode_SINGLE_PATH && requestCode == IMAGE_TAG_USER){
-            String imgPath = data.getStringExtra(SystemAlbumPickerActivity.key_singlePath);
-            userPhoto.setImageBitmap(ImageUtils.getimage(imgPath));
+            USER_IMAGE_PATH = data.getStringExtra(SystemAlbumPickerActivity.key_singlePath);
+            userPhoto.setImageBitmap(ImageUtils.getimage(USER_IMAGE_PATH));
             userTipView.setVisibility(View.GONE);
         } else if(resultCode == SystemAlbumPickerActivity.resultCode_SINGLE_PATH && requestCode == IMAGE_TAG_PAPER){
-            String imgPath = data.getStringExtra(SystemAlbumPickerActivity.key_singlePath);
-            paperPhoto.setImageBitmap(ImageUtils.getimage(imgPath));
+            PAPER_IMAGE_PATH = data.getStringExtra(SystemAlbumPickerActivity.key_singlePath);
+            paperPhoto.setImageBitmap(ImageUtils.getimage(PAPER_IMAGE_PATH));
             paperTipView.setVisibility(View.GONE);
         }
     }
+
 }
