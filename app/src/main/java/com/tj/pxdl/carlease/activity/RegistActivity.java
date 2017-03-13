@@ -115,7 +115,7 @@ public class RegistActivity extends BaseActivity {
     }
 
     private void reqRegist(String mobileStr,String passStr,String vcode){
-        OkHttpUtils.post().url(BaseConfig.REGIST_URL)
+        OkHttpUtils.post().url(BaseConfig.USER_REGIST_URL)
                 .addParams("mobile",mobileStr)
                 .addParams("passWord",passStr)
                 .addParams("vcode",vcode)

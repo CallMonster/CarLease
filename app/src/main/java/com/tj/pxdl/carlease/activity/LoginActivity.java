@@ -117,7 +117,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void reqLogin(String username,String passStr){
-        OkHttpUtils.post().url(BaseConfig.LOGIN_URL)
+        OkHttpUtils.post().url(BaseConfig.USER_LOGIN_URL)
                 .addParams("mobile",username)
                 .addParams("passWord",passStr)
                 .build().execute(new StringCallback() {
