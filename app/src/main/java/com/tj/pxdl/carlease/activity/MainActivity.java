@@ -93,8 +93,8 @@ public class MainActivity extends BaseActivity {
     public void onClickListener(View view) {
         switch (view.getId()) {
             case R.id.menuBtn:
-//                Intent intent=new Intent(this,MenuActivity.class);
-                Intent intent = new Intent(this, LoginActivity.class);
+                Intent intent=new Intent(this,MenuActivity.class);
+//                Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
                 break;

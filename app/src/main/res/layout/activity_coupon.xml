@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_grey"
+    android:orientation="vertical"
+    tools:context="com.tj.pxdl.carlease.MenuAct.CouponActivity">
+
+    <include layout="@layout/layout_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <com.tj.pxdl.carlease.widget.OneKeyClearEditText
+            android:id="@+id/couponEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@color/nocolor"
+            android:hint="请输入手机号"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textColor="@color/text_black"
+            android:textSize="14sp"
+            app:deletecolor="@color/text_grey" />
+
+        <TextView
+            android:id="@+id/couponBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/tip_couponbtn"
+            android:textColor="@color/theme_color" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_color" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/couponView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+        android:fadingEdge="none"
+        android:overScrollMode="never" />
+
+</LinearLayout>

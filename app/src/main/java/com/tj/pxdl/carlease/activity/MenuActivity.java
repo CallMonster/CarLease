@@ -3,8 +3,10 @@ package com.tj.pxdl.carlease.activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 
+import com.tj.pxdl.carlease.MenuAct.CouponActivity;
 import com.tj.pxdl.carlease.R;
 import com.tj.pxdl.carlease.adapter.MenuAdapter;
 import com.tj.pxdl.carlease.base.BaseActivity;
@@ -38,6 +40,14 @@ public class MenuActivity extends BaseActivity {
         };
         MenuAdapter adapter=new MenuAdapter(this,valueArr);
         menuListView.setAdapter(adapter);
+        menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(MenuActivity.this, CouponActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right,R.anim.out_from_left);
+            }
+        });
     }
 
     @OnClick({R.id.leftBtn, R.id.rightBtn})

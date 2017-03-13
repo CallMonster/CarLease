@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <View
+        android:id="@+id/topBg"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bg_border_circle_theme" />
+
+    <View
+        android:id="@+id/bottomBg"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/topBg"
+        android:layout_marginBottom="13dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bg_border_circle_white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layerType="software"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/topBg"
+        android:background="@drawable/dotted_line" />
+
+    <ImageView
+        android:id="@+id/tag"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="13dp"
+        android:src="@mipmap/icon_coupon_timely" />
+
+    <TextView
+        android:id="@+id/couponName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/tag"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        tools:text="分时租车优惠券¥5.00" />
+
+    <TextView
+        android:id="@+id/timeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="14dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        tools:text="2017-03-02截止" />
+
+    <TextView
+        android:id="@+id/contentView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topBg"
+        android:padding="12dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/text_black"
+        android:textSize="14sp"
+        tools:text="满额10送5" />
+
+</RelativeLayout>
