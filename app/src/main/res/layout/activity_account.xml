@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top" />
+
+    <com.tj.pxdl.carlease.widget.CircleImageView
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="35dp"
+        android:src="@mipmap/icon_bind_card"
+        app:border_color="@color/bg_theme_color" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text_black"
+        android:textSize="16sp"
+        android:text="出行服务平台账户" />
+
+    <TextView
+        android:id="@+id/priceView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="5dp"
+        android:drawableRight="@mipmap/icon_gray_right_arrow"
+        android:gravity="center_horizontal"
+        android:textColor="@color/text_black"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        tools:text="¥19878.00" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/line_color" />
+
+    <com.tj.pxdl.carlease.widget.OneKeyClearEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/nocolor"
+        android:hint="请输入要充值的金额"
+        android:inputType="number"
+        android:padding="15dp"
+        android:maxLength="5"
+        android:textColor="@color/text_black"
+        android:textSize="14sp"
+        app:deletecolor="@color/text_grey"
+        tools:text="123456" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/line_color" />
+
+    <com.tj.pxdl.carlease.widget.ListViewShowView
+        android:id="@+id/payListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:cacheColorHint="#00000000"
+        android:divider="@color/line_color"
+        android:dividerHeight="1px"
+        android:fadingEdge="none"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:listSelector="#00000000"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/line_color" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/accBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_edittext_focused"
+        android:text="暂不支持"
+        android:textColor="@color/bg_theme_color"
+        android:textSize="14sp" />
+
+</LinearLayout>

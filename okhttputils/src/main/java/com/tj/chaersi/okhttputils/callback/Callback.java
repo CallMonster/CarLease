@@ -47,7 +47,7 @@ public abstract class Callback<T> {
      */
     public abstract T parseNetworkResponse(Response response, int id) throws Exception;
 
-    public abstract void onError(Call call, Exception e, int id,String response,int resultCode);
+    public abstract void onError(Call call, Exception e, int id,Response response);
 
     public abstract void onResponse(T response, int id,int resultCode);
 
@@ -60,7 +60,7 @@ public abstract class Callback<T> {
         }
 
         @Override
-        public void onError(Call call, Exception e, int id,String response,int resultCode) {
+        public void onError(Call call, Exception e, int id,Response response) {
 
         }
 

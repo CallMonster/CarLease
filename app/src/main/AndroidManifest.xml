@@ -43,7 +43,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DesignActivity"
+            android:name=".MenuAct.DesignActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -59,10 +59,12 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="aLMVG036qEfib6PlxYYv3STUcIDPyhMz" />
 
-        <activity android:name=".activity.AuthActivity" />
+        <activity android:name=".MenuAct.AuthActivity" />
         <activity android:name=".MenuAct.CouponActivity" />
         <activity android:name=".activity.ForgetPwdActivity" />
-        <activity android:name=".activity.UpdatePwdActivity"></activity>
+        <activity android:name=".activity.UpdatePwdActivity" />
+        <activity android:name=".MenuAct.AccountActivity" />
+        <activity android:name=".MenuAct.AccountMsgActivity"></activity>
     </application>
 
 </manifest>

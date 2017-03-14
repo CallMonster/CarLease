@@ -25,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Response;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -128,29 +129,29 @@ public class LoginActivity extends BaseActivity {
             }
 
             @Override
-            public void onError(Call call, Exception e, int id) {
+            public void onError(Call call, Exception e, int id, Response response) {
                 Log.e("login","err:"+e);
-                showTips("网络出现异常，请稍后");
+                if(response!=null){
+                    LoginErrModel err= gson.fromJson(response.body().toString(),LoginErrModel.class);
+                    showTips(err.getError_description());
+                }else{
+                    showTips("网络出现异常，请稍后");
+                }
             }
 
             @Override
             public void onResponse(String response, int id,int resultCode) {
                 Log.d("login","succ:"+id+"---"+response);
-                if(200==resultCode){
-                    LoginResultModel login= gson.fromJson(response,LoginResultModel.class);
-                    preference.saveUserInfo(login);
-                    if(intent_flag==0){
-                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(R.anim.in_from_left,R.anim.out_from_right);
-                    }else{
-                        setResult(RESULT_OK);
-                        finish();
-                    }
-                }else{
-                    LoginErrModel err= gson.fromJson(response,LoginErrModel.class);
-                    showTips(err.getError_description());
+                LoginResultModel login = gson.fromJson(response, LoginResultModel.class);
+                preference.saveUserInfo(login);
+                if (intent_flag == 0) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
+                } else {
+                    setResult(RESULT_OK);
+                    finish();
                 }
             }
         });

@@ -22,6 +22,7 @@ import com.tj.pxdl.carlease.utils.PreferenceUtils;
 
 import butterknife.ButterKnife;
 import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * 欢迎页面
@@ -65,17 +66,15 @@ public class WelcomeActivity extends BaseActivity {
             }
 
             @Override
-            public void onError(Call call, Exception e, int id) {
+            public void onError(Call call, Exception e, int id, Response response) {
                 Log.e("login","err:"+e);
             }
 
             @Override
             public void onResponse(String response, int id,int resultCode) {
                 Log.d("login","succ:"+id+"---"+response);
-                if(200==resultCode){
-                    LoginResultModel login= gson.fromJson(response,LoginResultModel.class);
-                    preference.saveUserInfo(login);
-                }
+                LoginResultModel login = gson.fromJson(response, LoginResultModel.class);
+                preference.saveUserInfo(login);
             }
         });
     }

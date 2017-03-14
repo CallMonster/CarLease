@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.MediaType;
+import okhttp3.Response;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func3;
@@ -112,22 +113,24 @@ public class UpdatePwdActivity extends BaseActivity {
             }
 
             @Override
-            public void onError(Call call, Exception e, int id) {
+            public void onError(Call call, Exception e, int id, Response response) {
                 Log.e("login","err:"+e);
-                showTips("网络出现异常，请稍后");
+                if(response!=null){
+                    UpdateErrModel err=gson.fromJson(response.body().toString(),UpdateErrModel.class);
+                    showTips(err.getMessage());
+                }else{
+                    showTips("网络出现异常，请稍后");
+                }
             }
 
             @Override
             public void onResponse(String response, int id, int resultCode) {
                 Log.i(TAG,response);
-                if(200==resultCode){
-                    UpdateResultModel updatePwd= gson.fromJson(response,UpdateResultModel.class);
+                UpdateResultModel updatePwd = gson.fromJson(response, UpdateResultModel.class);
+                if(updatePwd.isSuccess()){
                     showTips("修改密码成功，以后请使用新密码");
                     finish();
                     overridePendingTransition(R.anim.in_from_right, R.anim.out_from_left);
-                }else{
-                    UpdateErrModel err=gson.fromJson(response,UpdateErrModel.class);
-                    showTips(err.getMessage());
                 }
             }
         });

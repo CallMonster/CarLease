@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.MediaType;
+import okhttp3.Response;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.FuncN;
@@ -136,24 +137,24 @@ public class RegistActivity extends BaseActivity {
             }
 
             @Override
-            public void onError(Call call, Exception e, int id) {
+            public void onError(Call call, Exception e, int id, Response response) {
                 Log.e(TAG,"err:"+e);
-                showTips("网络出现异常，请稍后");
+                if(response!=null){
+                    RegistErrModel err=gson.fromJson(response.body().toString(),RegistErrModel.class);
+                    showTips(err.getMessage());
+                }else{
+                    showTips("网络出现异常，请稍后");
+                }
             }
 
             @Override
             public void onResponse(String response, int id,int resultCode) {
                 Log.d(TAG,"succ:"+response);
-                if(200==resultCode){
-                    RegistResultModel regist= gson.fromJson(response,RegistResultModel.class);
-                    if(regist.isSuccess()){
-                        showTips("恭喜您注册成功");
-                        finish();
-                        overridePendingTransition(R.anim.in_from_left,R.anim.out_from_right);
-                    }
-                }else{
-                    RegistErrModel err=gson.fromJson(response,RegistErrModel.class);
-                    showTips(err.getMessage());
+                RegistResultModel regist = gson.fromJson(response, RegistResultModel.class);
+                if (regist.isSuccess()) {
+                    showTips("恭喜您注册成功");
+                    finish();
+                    overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
                 }
             }
         });
