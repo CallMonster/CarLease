@@ -2,6 +2,7 @@ package com.tj.chaersi.okhttputils.callback;
 
 import java.io.IOException;
 
+import okhttp3.Call;
 import okhttp3.Response;
 
 /**
