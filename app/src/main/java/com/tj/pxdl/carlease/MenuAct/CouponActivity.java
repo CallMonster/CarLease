@@ -6,9 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.tj.pxdl.carlease.R;
-import com.tj.pxdl.carlease.adapter.CouponAdapter;
+import com.tj.pxdl.carlease.MenuAct.adapter.CouponAdapter;
 import com.tj.pxdl.carlease.base.BaseActivity;
-import com.tj.pxdl.carlease.widget.DividerDecoration;
 import com.tj.pxdl.carlease.widget.OneKeyClearEditText;
 
 import butterknife.BindView;

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
+import com.tj.pxdl.carlease.MenuAct.AccountActivity;
 import com.tj.pxdl.carlease.MenuAct.AuthActivity;
 import com.tj.pxdl.carlease.MenuAct.CouponActivity;
 import com.tj.pxdl.carlease.MenuAct.DesignActivity;
@@ -40,15 +41,28 @@ public class MenuActivity extends BaseActivity {
         String[] valueArr=new String[]{
           "¥0.00","0","0","0","","未认证","","400-090-1619"
         };
-        MenuAdapter adapter=new MenuAdapter(this,valueArr);
+
+        String[] titleArr=new String[]{
+                "账户","优惠券","积分","消息","订单","征信认证","发票管理","客服热线"
+        };
+        int[] tagImgArr = new int[]{
+                R.mipmap.icon_gray_account, R.mipmap.icon_gray_coupon, R.mipmap.ic_jifen,
+                R.mipmap.icon_gray_website_letter, R.mipmap.icon_gray_order,
+                R.mipmap.icon_gray_id_verify, R.mipmap.icon_gray_receipt,
+                R.mipmap.icon_user_phone
+        };
+
+
+        MenuAdapter adapter=new MenuAdapter(this,valueArr,titleArr,tagImgArr);
         menuListView.setAdapter(adapter);
         menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 switch (position){
                     case 0:
-
+                        Intent accountIntent=new Intent(MenuActivity.this, AccountActivity.class);
+                        startActivity(accountIntent);
+                        overridePendingTransition(R.anim.in_from_right,R.anim.out_from_left);
                         break;
                     case 1:
                         Intent couponIntent=new Intent(MenuActivity.this, CouponActivity.class);

@@ -21,17 +21,10 @@ public class MenuAdapter extends BaseAdapter {
     private String[] titleArr;
     private int[] tagImgArr;
     private String[] itemValueArr;
-    public MenuAdapter(Context context,String[] itemValueArr){
+    public MenuAdapter(Context context,String[] itemValueArr,String[] titleArr,int[] tagImgArr){
         this.context=context;
-        titleArr=new String[]{
-          "账户","优惠券","积分","消息","订单","征信认证","发票管理","客服热线"
-        };
-        tagImgArr = new int[]{
-                R.mipmap.icon_gray_account, R.mipmap.icon_gray_coupon, R.mipmap.ic_jifen,
-                R.mipmap.icon_gray_website_letter, R.mipmap.icon_gray_order,
-                R.mipmap.icon_gray_id_verify, R.mipmap.icon_gray_receipt,
-                R.mipmap.icon_user_phone
-        };
+        this.titleArr=titleArr;
+        this.tagImgArr = tagImgArr;
 
         this.itemValueArr=itemValueArr;
     }
