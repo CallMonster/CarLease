@@ -79,7 +79,12 @@ public class HttpsUtils {
         SSLParams sslParams = new SSLParams();
 
         try {
-            InputStream bksFile = context.getAssets().open(bksPath);
+            InputStream bksFile;
+            if(bksPath==null){
+                bksFile=null;
+            }else{
+                bksFile= context.getAssets().open(bksPath);
+            }
             InputStream certificates = context.getAssets().open(cerPath);
             TrustManager[] trustManagers = prepareTrustManager(certificates);
             KeyManager[] keyManagers;

@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
+import com.tj.pxdl.carlease.MenuAct.AuthActivity;
 import com.tj.pxdl.carlease.MenuAct.CouponActivity;
+import com.tj.pxdl.carlease.MenuAct.DesignActivity;
 import com.tj.pxdl.carlease.R;
 import com.tj.pxdl.carlease.adapter.MenuAdapter;
 import com.tj.pxdl.carlease.base.BaseActivity;
@@ -43,9 +45,22 @@ public class MenuActivity extends BaseActivity {
         menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(MenuActivity.this, CouponActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.in_from_right,R.anim.out_from_left);
+
+                switch (position){
+                    case 0:
+
+                        break;
+                    case 1:
+                        Intent couponIntent=new Intent(MenuActivity.this, CouponActivity.class);
+                        startActivity(couponIntent);
+                        overridePendingTransition(R.anim.in_from_right,R.anim.out_from_left);
+                        break;
+                    case 5:
+                        Intent authIntent=new Intent(MenuActivity.this, AuthActivity.class);
+                        startActivity(authIntent);
+                        overridePendingTransition(R.anim.in_from_right,R.anim.out_from_left);
+                        break;
+                }
             }
         });
     }
