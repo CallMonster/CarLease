@@ -1,6 +1,7 @@
-package com.tj.pxdl.carlease.activity;
+package com.tj.pxdl.carlease.MenuAct;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.tj.pxdl.carlease.R;
 import com.tj.pxdl.carlease.adapter.DesignAdapter;
@@ -18,6 +19,7 @@ import butterknife.OnClick;
  */
 public class DesignActivity extends BaseActivity {
 
+    @BindView(R.id.updatePwd) TextView updatePwd;
     @BindView(R.id.designListView) ListViewShowView designListView;
 
     @Override
@@ -29,9 +31,17 @@ public class DesignActivity extends BaseActivity {
         designListView.setAdapter(adapter);
     }
 
-    @OnClick(R.id.leftBtn)
+    @OnClick({R.id.leftBtn,R.id.updatePwd})
     public void onClickListener(View v) {
-        finish();
-        overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
+        switch (v.getId()){
+            case R.id.leftBtn:
+                finish();
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
+                break;
+            case R.id.updatePwd:
+
+                break;
+        }
+
     }
 }

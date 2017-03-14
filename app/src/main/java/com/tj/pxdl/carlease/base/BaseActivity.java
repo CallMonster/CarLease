@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by Chaersi on 16/7/1.
  */
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener,NetStateReceiver.onNETWORK_STATUS {
-
+    public String TAG="carleasr_Act";
     private ProgressDialog progressDialog;
     public int netState;//0：没有网络   1：WIFI网络   2：WAP网络    3：NET网络
 

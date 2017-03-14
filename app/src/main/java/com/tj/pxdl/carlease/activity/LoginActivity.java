@@ -1,38 +1,34 @@
 package com.tj.pxdl.carlease.activity;
 
 import android.content.Intent;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.tj.chaersi.okhttputils.OkHttpUtils;
-import com.tj.chaersi.okhttputils.callback.Callback;
 import com.tj.chaersi.okhttputils.callback.StringCallback;
+import com.tj.pxdl.carlease.MenuAct.AuthActivity;
 import com.tj.pxdl.carlease.R;
 import com.tj.pxdl.carlease.base.BaseActivity;
 import com.tj.pxdl.carlease.base.BaseApplication;
 import com.tj.pxdl.carlease.base.BaseConfig;
-import com.tj.pxdl.carlease.model.LoginModel;
-import com.tj.pxdl.carlease.model.RegistModel;
+import com.tj.pxdl.carlease.model.user.err.LoginErrModel;
+import com.tj.pxdl.carlease.model.user.result.LoginResultModel;
 import com.tj.pxdl.carlease.utils.CheckUtil;
-
-import java.util.ArrayList;
+import com.tj.pxdl.carlease.utils.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action1;
 import rx.functions.Func2;
-import rx.functions.Func3;
-import rx.functions.Func4;
 
 /**
  * 登录
@@ -47,14 +43,24 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.userEdit) EditText userEdit;
     @BindView(R.id.loginBtn) Button loginBtn;
     @BindView(R.id.forgetPassBtn) TextView forgetPassBtn;
+
+    private Gson gson;
+    private PreferenceUtils preference;
+    private int intent_flag;//当其为0时直接跳转至收首页，否则返回结果
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        Intent intent=getIntent();
+        intent_flag=intent.getIntExtra("intent_flag",0);
+
         rightView.setVisibility(View.VISIBLE);
         rightView.setText("注册");
         rightView.setTextColor(getResources().getColor(R.color.bg_theme_color));
         rightBtn.setVisibility(View.VISIBLE);
+
+        preference=new PreferenceUtils(this);
 
         Observable<CharSequence> userObservable = RxTextView.textChanges(userEdit);
         Observable<CharSequence> passObservable = RxTextView.textChanges(passEdit);
@@ -63,19 +69,9 @@ public class LoginActivity extends BaseActivity {
             public Boolean call(CharSequence userStr, CharSequence passStr) {
                 return CheckUtil.strIsMobile(userStr.toString())&&CheckUtil.isPassword(passStr.toString());
             }
-        }).subscribe(new Subscriber<Boolean>() {
+        }).subscribe(new Action1<Boolean>() {
             @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(Boolean aBoolean) {
+            public void call(Boolean aBoolean) {
                 if (aBoolean) {
                     loginBtn.setEnabled(true);
                     loginBtn.setBackgroundResource(R.drawable.bg_edittext_focused);
@@ -117,9 +113,13 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void reqLogin(String username,String passStr){
+        gson=BaseApplication.gson;
         OkHttpUtils.post().url(BaseConfig.USER_LOGIN_URL)
-                .addParams("mobile",username)
-                .addParams("passWord",passStr)
+                .addParams("client_id","client-id")
+                .addParams("client_secret:","client_secret")
+                .addParams("grant_type:","password")
+                .addParams("username",username)
+                .addParams("password",passStr)
                 .build().execute(new StringCallback() {
             @Override
             public void onAfter(int id) {
@@ -136,20 +136,21 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResponse(String response, int id,int resultCode) {
                 Log.d("login","succ:"+id+"---"+response);
-                if(TextUtils.isEmpty(response)){
-                    showTips(getResources().getString(R.string.tip_common_err));
-                    return;
-                }
-                LoginModel loginModel= BaseApplication.gson.fromJson(response,LoginModel.class);
-                if(loginModel.isSuccess()){
-                    showTips(getResources().getString(R.string.tip_login));
-                    finish();
-                    overridePendingTransition(R.anim.in_from_left,R.anim.out_from_right);
+                if(200==resultCode){
+                    LoginResultModel login= gson.fromJson(response,LoginResultModel.class);
+                    preference.saveUserInfo(login);
+                    if(intent_flag==0){
+                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.in_from_left,R.anim.out_from_right);
+                    }else{
+                        setResult(RESULT_OK);
+                        finish();
+                    }
                 }else{
-                    ArrayList<String> tipsArr=new ArrayList<String>();
-                    tipsArr.add(loginModel.getHint().getMobile());
-                    tipsArr.add(loginModel.getHint().getPassWord());
-                    showTips(tipsArr);
+                    LoginErrModel err= gson.fromJson(response,LoginErrModel.class);
+                    showTips(err.getError_description());
                 }
             }
         });

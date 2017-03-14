@@ -60,7 +60,9 @@
             android:value="aLMVG036qEfib6PlxYYv3STUcIDPyhMz" />
 
         <activity android:name=".activity.AuthActivity" />
-        <activity android:name=".MenuAct.CouponActivity"></activity>
+        <activity android:name=".MenuAct.CouponActivity" />
+        <activity android:name=".activity.ForgetPwdActivity" />
+        <activity android:name=".activity.UpdatePwdActivity"></activity>
     </application>
 
 </manifest>

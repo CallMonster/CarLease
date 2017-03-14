@@ -8,10 +8,12 @@ public class BaseConfig {
 
     /**登录*/
     public static final String USER_LOGIN_URL=BASE_URL+"/oauth/token";
+    /**刷新快速登录*/
+    public static final String USER_FASTLOGIN_URL=BASE_URL+"/oauth/token";
     /**注册*/
     public static final String USER_REGIST_URL=BASE_URL+"/api/users/register";
-    /**忘记密码*/
-    public static final String USER_FORGETPASS_URl=BASE_URL+"/api/users/change-pass";
+    /**修改密码*/
+    public static final String USER_UPDATEPASS_URL=BASE_URL+"/api/users/change-pass";
 
     /**获取账户信息*/
     public static final String ACCOUNT_INFO_URl=BASE_URL+"/api/accounts/info";

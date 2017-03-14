@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_grey"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top" />
+
+    <com.tj.pxdl.carlease.widget.OneKeyClearEditText
+        android:id="@+id/pwdEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/nocolor"
+        android:hint="请输入登录密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:maxLength="32"
+        android:textColor="@color/text_black"
+        android:textSize="14sp"
+        app:deletecolor="@color/text_grey" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/line_color" />
+
+    <com.tj.pxdl.carlease.widget.OneKeyClearEditText
+        android:id="@+id/newpwdEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/nocolor"
+        android:hint="请输入新密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:maxLength="32"
+        android:textColor="@color/text_black"
+        android:textSize="14sp"
+        app:deletecolor="@color/text_grey" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/line_color" />
+
+    <com.tj.pxdl.carlease.widget.OneKeyClearEditText
+        android:id="@+id/repwdEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/nocolor"
+        android:hint="请再次输入新密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:maxLength="32"
+        android:padding="15dp"
+        android:textColor="@color/text_black"
+        android:textSize="14sp"
+        app:deletecolor="@color/text_grey" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/line_color" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_edittext_focused"
+        android:text="确定"
+        android:textColor="@color/bg_theme_color"
+        android:textSize="14sp" />
+</LinearLayout>

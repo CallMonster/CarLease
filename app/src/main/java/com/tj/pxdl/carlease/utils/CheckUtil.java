@@ -44,7 +44,7 @@ public class CheckUtil {
      * @return
      */
     public static boolean isPassword(String password) {
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]{6,18}$");
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]{6,32}$");
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }

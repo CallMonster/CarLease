@@ -15,6 +15,7 @@
         android:background="@color/line_color" />
 
     <TextView
+        android:id="@+id/updatePwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"

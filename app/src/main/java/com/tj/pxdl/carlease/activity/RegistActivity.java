@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.tj.chaersi.okhttputils.OkHttpUtils;
 import com.tj.chaersi.okhttputils.callback.StringCallback;
@@ -13,7 +14,10 @@ import com.tj.pxdl.carlease.R;
 import com.tj.pxdl.carlease.base.BaseActivity;
 import com.tj.pxdl.carlease.base.BaseApplication;
 import com.tj.pxdl.carlease.base.BaseConfig;
-import com.tj.pxdl.carlease.model.RegistModel;
+import com.tj.pxdl.carlease.model.user.err.RegistErrModel;
+import com.tj.pxdl.carlease.model.user.req.RegistReqModel;
+import com.tj.pxdl.carlease.model.user.result.LoginResultModel;
+import com.tj.pxdl.carlease.model.user.result.RegistResultModel;
 import com.tj.pxdl.carlease.utils.CheckUtil;
 import com.tj.pxdl.carlease.widget.OneKeyClearEditText;
 
@@ -24,9 +28,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.MediaType;
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Func4;
 import rx.functions.FuncN;
 
 public class RegistActivity extends BaseActivity {
@@ -41,6 +45,7 @@ public class RegistActivity extends BaseActivity {
     @BindView(R.id.inviteEdit) OneKeyClearEditText inviteEdit;
     @BindView(R.id.regBtn) Button regBtn;
 
+    private Gson gson;
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_regist);
@@ -92,7 +97,7 @@ public class RegistActivity extends BaseActivity {
                 }
             }
         });
-
+        gson=BaseApplication.gson;
     }
 
     @OnClick({R.id.leftBtn, R.id.regBtn, R.id.accordBtn})
@@ -107,18 +112,22 @@ public class RegistActivity extends BaseActivity {
                 String mobileStr=mobileEdit.getText().toString().trim();
                 String passStr=passedit.getText().toString().trim();
                 String vcodeStr=passedit.getText().toString().trim();
-                reqRegist(mobileStr,passStr,vcodeStr);
+                RegistReqModel registReq=new RegistReqModel();
+                registReq.setUsername(mobileStr);
+                registReq.setPassword(passStr);
+                registReq.setSms_code(vcodeStr);
+                reqRegist(registReq);
                 break;
             case R.id.accordBtn:
+
                 break;
         }
     }
 
-    private void reqRegist(String mobileStr,String passStr,String vcode){
-        OkHttpUtils.post().url(BaseConfig.USER_REGIST_URL)
-                .addParams("mobile",mobileStr)
-                .addParams("passWord",passStr)
-                .addParams("vcode",vcode)
+    private void reqRegist(RegistReqModel registReq){
+        OkHttpUtils.postString().url(BaseConfig.USER_REGIST_URL)
+                .content(gson.toJson(registReq))
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build().execute(new StringCallback() {
             @Override
             public void onAfter(int id) {
@@ -135,17 +144,16 @@ public class RegistActivity extends BaseActivity {
             @Override
             public void onResponse(String response, int id,int resultCode) {
                 Log.d(TAG,"succ:"+response);
-                RegistModel regModel= BaseApplication.gson.fromJson(response,RegistModel.class);
-                if(regModel.isSuccess()){
-                    showTips(getResources().getString(R.string.tip_reg));
-                    finish();
-                    overridePendingTransition(R.anim.in_from_left,R.anim.out_from_right);
+                if(200==resultCode){
+                    RegistResultModel regist= gson.fromJson(response,RegistResultModel.class);
+                    if(regist.isSuccess()){
+                        showTips("恭喜您注册成功");
+                        finish();
+                        overridePendingTransition(R.anim.in_from_left,R.anim.out_from_right);
+                    }
                 }else{
-                    ArrayList<String> tipsArr=new ArrayList<String>();
-                    tipsArr.add(regModel.getHint().getMobile());
-                    tipsArr.add(regModel.getHint().getPassword());
-                    tipsArr.add(regModel.getHint().getVcode());
-                    showTips(tipsArr);
+                    RegistErrModel err=gson.fromJson(response,RegistErrModel.class);
+                    showTips(err.getMessage());
                 }
             }
         });
