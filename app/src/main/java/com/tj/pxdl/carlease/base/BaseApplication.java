@@ -1,6 +1,9 @@
 package com.tj.pxdl.carlease.base;
 
+import android.app.Activity;
 import android.app.Application;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.google.gson.Gson;
@@ -8,9 +11,11 @@ import com.tj.chaersi.okhttputils.OkHttpUtils;
 import com.tj.chaersi.okhttputils.cache.CacheInterceptor;
 import com.tj.chaersi.okhttputils.https.HttpsUtils;
 import com.tj.chaersi.okhttputils.log.LoggerInterceptor;
+import com.tj.pxdl.carlease.widget.ActivityManagerCallBack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +44,7 @@ public class BaseApplication extends Application {
         super.onCreate();
         SDKInitializer.initialize(this);
         gson=new Gson();
+        instance=this;
 
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(getApplicationContext(),cerPath, bksPath, "1234abcD");
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -55,6 +61,8 @@ public class BaseApplication extends Application {
                     }
                 }).build();
         OkHttpUtils.initClient(okHttpClient);
+
+        registerActivityLifecycleCallbacks(new ActivityManagerCallBack());
     }
 
     CookieJar cookies=new CookieJar() {
@@ -71,4 +79,15 @@ public class BaseApplication extends Application {
             return cookies != null ? cookies : new ArrayList<Cookie>();
         }
     };
+
+    /**
+     * 清空所有act
+     */
+    public void clearAct() {
+        for (Activity activity : ActivityManagerCallBack.mActivityLinkedList) {
+            activity.finish();
+        }
+        if (ActivityManagerCallBack.mActivityLinkedList.size() == 0)
+            ActivityManagerCallBack.mActivityLinkedList.clear();
+    }
 }

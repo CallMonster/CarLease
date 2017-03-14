@@ -4,7 +4,7 @@ package com.tj.pxdl.carlease.base;
  * Created by Chaersi on 17/2/28.
  */
 public class BaseConfig {
-    private static final String BASE_URL = "https://10.120.20.52:8443";
+    private static final String BASE_URL = "http://10.120.21.243:9000";
 
     /**登录*/
     public static final String USER_LOGIN_URL=BASE_URL+"/oauth/token";
