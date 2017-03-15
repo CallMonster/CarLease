@@ -55,90 +55,118 @@
         android:layout_marginRight="20dp"
         android:background="@color/line_color" />
 
-    <RelativeLayout
-        android:id="@+id/driveLayoutBtn"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_border_circle_grey">
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:fadingEdge="none"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
-        <ImageView
-            android:id="@+id/drivePhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/icon_token_drive_papers" />
-
-        <TextView
-            android:id="@+id/drive_tipView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.6"
-            android:background="@color/line_color"
-            android:gravity="right|bottom"
-            android:padding="10sp"
-            android:text="上传驾驶证照片"
-            android:textColor="@color/white" />
+            android:orientation="vertical">
 
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/userLayoutBtn"
+            <RelativeLayout
+                android:id="@+id/driveLayoutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_border_circle_grey">
+
+                <ImageView
+                    android:id="@+id/drivePhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_token_drive_papers" />
+
+                <TextView
+                    android:id="@+id/drive_tipView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.6"
+                    android:background="@color/line_color"
+                    android:gravity="right|bottom"
+                    android:padding="10sp"
+                    android:text="上传驾驶证照片"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/userLayoutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_border_circle_grey">
+
+                <ImageView
+                    android:id="@+id/userPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_token_user_papers" />
+
+                <TextView
+                    android:id="@+id/user_tipView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.6"
+                    android:background="@color/line_color"
+                    android:gravity="right|bottom"
+                    android:padding="10sp"
+                    android:text="上传身份证照片"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/paperLayoutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_border_circle_grey">
+
+                <ImageView
+                    android:id="@+id/paperPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_token_user_and_papers" />
+
+                <TextView
+                    android:id="@+id/paper_tipView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.6"
+                    android:background="@color/line_color"
+                    android:gravity="right|bottom"
+                    android:padding="10sp"
+                    android:text="上传手持身份证照片"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/submitBtn"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_border_circle_grey">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edittext_focused"
+        android:text="提交认证"
+        android:textColor="@color/bg_theme_color"
+        android:textSize="14sp" />
 
-        <ImageView
-            android:id="@+id/userPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/icon_token_user_papers" />
-
-        <TextView
-            android:id="@+id/user_tipView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.6"
-            android:background="@color/line_color"
-            android:gravity="right|bottom"
-            android:padding="10sp"
-            android:text="上传身份证照片"
-            android:textColor="@color/white" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/paperLayoutBtn"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_border_circle_grey">
-
-        <ImageView
-            android:id="@+id/paperPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/icon_token_user_and_papers" />
-
-        <TextView
-            android:id="@+id/paper_tipView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.6"
-            android:background="@color/line_color"
-            android:gravity="right|bottom"
-            android:padding="10sp"
-            android:text="上传手持身份证照片"
-            android:textColor="@color/white" />
-
-    </RelativeLayout>
 
 </LinearLayout>
