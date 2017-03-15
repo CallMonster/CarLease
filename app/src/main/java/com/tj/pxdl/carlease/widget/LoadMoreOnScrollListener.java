@@ -31,8 +31,6 @@ public abstract class LoadMoreOnScrollListener extends RecyclerView.OnScrollList
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
-        Log.i("scroll",RecyclerView.SCROLL_STATE_IDLE+"当前状态："+newState);
-
         visibleItemCount = recyclerView.getChildCount();
         totalItemCount = mLinearLayoutManager.getItemCount();
         firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();

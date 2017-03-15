@@ -42,7 +42,6 @@ public class AccountMsgActivity extends BaseActivity {
             strArr.add("index position"+i);
         }
 
-
         msgRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         msgRecyclerView.setLayoutManager(layoutManager);
@@ -99,6 +98,7 @@ public class AccountMsgActivity extends BaseActivity {
         switch (v.getId()){
             case R.id.leftBtn:
                 finish();
+                overridePendingTransition(R.anim.in_from_left,R.anim.out_from_right);
                 break;
             case R.id.no_msg:
                 msgRecyclerView.setVisibility(View.VISIBLE);

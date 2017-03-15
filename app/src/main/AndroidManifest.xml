@@ -64,7 +64,11 @@
         <activity android:name=".activity.ForgetPwdActivity" />
         <activity android:name=".activity.UpdatePwdActivity" />
         <activity android:name=".MenuAct.AccountActivity" />
-        <activity android:name=".MenuAct.AccountMsgActivity"></activity>
+        <activity android:name=".MenuAct.AccountMsgActivity" />
+        <activity android:name=".MenuAct.MessageActivity" />
+        <activity android:name=".MenuAct.O" />
+        <activity android:name=".MenuAct.OrderActivity" />
+        <activity android:name=".MenuAct.OrderDetailActivity"></activity>
     </application>
 
 </manifest>

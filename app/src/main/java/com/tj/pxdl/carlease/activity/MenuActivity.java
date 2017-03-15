@@ -10,6 +10,8 @@ import com.tj.pxdl.carlease.MenuAct.AccountActivity;
 import com.tj.pxdl.carlease.MenuAct.AuthActivity;
 import com.tj.pxdl.carlease.MenuAct.CouponActivity;
 import com.tj.pxdl.carlease.MenuAct.DesignActivity;
+import com.tj.pxdl.carlease.MenuAct.MessageActivity;
+import com.tj.pxdl.carlease.MenuAct.OrderActivity;
 import com.tj.pxdl.carlease.R;
 import com.tj.pxdl.carlease.adapter.MenuAdapter;
 import com.tj.pxdl.carlease.base.BaseActivity;
@@ -67,6 +69,16 @@ public class MenuActivity extends BaseActivity {
                     case 1:
                         Intent couponIntent=new Intent(MenuActivity.this, CouponActivity.class);
                         startActivity(couponIntent);
+                        overridePendingTransition(R.anim.in_from_right,R.anim.out_from_left);
+                        break;
+                    case 3:
+                        Intent msgIntent=new Intent(MenuActivity.this, MessageActivity.class);
+                        startActivity(msgIntent);
+                        overridePendingTransition(R.anim.in_from_right,R.anim.out_from_left);
+                        break;
+                    case 4:
+                        Intent orderIntent=new Intent(MenuActivity.this, OrderActivity.class);
+                        startActivity(orderIntent);
                         overridePendingTransition(R.anim.in_from_right,R.anim.out_from_left);
                         break;
                     case 5:
