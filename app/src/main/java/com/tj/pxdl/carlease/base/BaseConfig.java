@@ -1,11 +1,12 @@
 package com.tj.pxdl.carlease.base;
 
+import com.tj.pxdl.carlease.utils.AppUtils;
+
 /**
  * Created by Chaersi on 17/2/28.
  */
 public class BaseConfig {
     private static final String BASE_URL = "http://10.120.21.243:9000";
-
     /**登录*/
     public static final String USER_LOGIN_URL=BASE_URL+"/oauth/token";
     /**刷新快速登录*/
@@ -13,7 +14,10 @@ public class BaseConfig {
     /**注册*/
     public static final String USER_REGIST_URL=BASE_URL+"/api/users/register";
     /**修改密码*/
-    public static final String USER_UPDATEPASS_URL=BASE_URL+"/api/users/change-pass";
+    public static final String USER_UPDATEPASS_URL=BASE_URL+"/api/users/changePass";
+    /**获取会员信息*/
+    public static final String USER_MEMBERSHIP_URL=BASE_URL+"/api/users/membership";
+
 
     /**获取账户信息*/
     public static final String ACCOUNT_INFO_URl=BASE_URL+"/api/accounts/info";

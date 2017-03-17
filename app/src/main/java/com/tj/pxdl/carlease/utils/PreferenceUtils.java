@@ -32,6 +32,14 @@ public class PreferenceUtils {
     }
 
     /**
+     * 获取token
+     * @return
+     */
+    public String getToken(){
+        return "bearer "+preferences.getString("access_token","");
+    }
+
+    /**
      * 获取用户登录信息
      * @return
      */

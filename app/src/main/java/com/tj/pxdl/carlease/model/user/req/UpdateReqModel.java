@@ -7,34 +7,35 @@ public class UpdateReqModel {
     /**
      * password : 123456
      * newPassword : 123456
-     * confirm_new_pass : 123456
+     * confirmNewPass : 123456
      */
 
-    private String password;
-    private String newPassword;
-    private String confirm_new_pass;
+    private String oldPass;
+    private String newPass;
+    private String confirmNewPass;
 
-    public String getPassword() {
-        return password;
+    public String getOldPass() {
+        return oldPass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setOldPass(String oldPass) {
+        this.oldPass = oldPass;
     }
 
-    public String getNewPassword() {
-        return newPassword;
+    public String getNewPass() {
+        return newPass;
     }
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
     }
 
-    public String getConfirm_new_pass() {
-        return confirm_new_pass;
+    public String getConfirmNewPass() {
+        return confirmNewPass;
     }
 
-    public void setConfirm_new_pass(String confirm_new_pass) {
-        this.confirm_new_pass = confirm_new_pass;
+    public void setConfirmNewPass(String confirmNewPass) {
+        this.confirmNewPass = confirmNewPass;
     }
 }
+

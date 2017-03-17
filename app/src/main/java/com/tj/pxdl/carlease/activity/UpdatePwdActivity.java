@@ -19,6 +19,7 @@ import com.tj.pxdl.carlease.model.user.req.UpdateReqModel;
 import com.tj.pxdl.carlease.model.user.result.LoginResultModel;
 import com.tj.pxdl.carlease.model.user.result.UpdateResultModel;
 import com.tj.pxdl.carlease.utils.CheckUtil;
+import com.tj.pxdl.carlease.utils.PreferenceUtils;
 import com.tj.pxdl.carlease.widget.OneKeyClearEditText;
 
 import butterknife.BindView;
@@ -44,11 +45,14 @@ public class UpdatePwdActivity extends BaseActivity {
     @BindView(R.id.repwdEdit) OneKeyClearEditText repwdEdit;
     @BindView(R.id.submitBtn) Button submitBtn;
 
+    private PreferenceUtils preference;
     private Gson gson;
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_update_pwd);
         ButterKnife.bind(this);
+
+        preference=new PreferenceUtils(this);
 
         Observable<CharSequence> pwdObservable= RxTextView.textChanges(pwdEdit);
         Observable<CharSequence> newPassObservable= RxTextView.textChanges(newpwdEdit);
@@ -91,9 +95,9 @@ public class UpdatePwdActivity extends BaseActivity {
                 String repwdStr=repwdEdit.getText().toString().trim();
 
                 UpdateReqModel updatePwd=new UpdateReqModel();
-                updatePwd.setPassword(pwdStr);
-                updatePwd.setConfirm_new_pass(newpwdStr);
-                updatePwd.setNewPassword(repwdStr);
+                updatePwd.setOldPass(pwdStr);
+                updatePwd.setConfirmNewPass(newpwdStr);
+                updatePwd.setNewPass(repwdStr);
                 reqUpdatePwd(updatePwd);
                 break;
         }
@@ -102,6 +106,7 @@ public class UpdatePwdActivity extends BaseActivity {
     private void reqUpdatePwd(UpdateReqModel updatePwd){
         gson= BaseApplication.gson;
         OkHttpUtils.postString().url(BaseConfig.USER_UPDATEPASS_URL)
+                .addHeader("Authorization",preference.getToken())
                 .content(gson.toJson(updatePwd))
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build().execute(new StringCallback() {
@@ -115,8 +120,15 @@ public class UpdatePwdActivity extends BaseActivity {
             @Override
             public void onError(Call call, Exception e, int id, Response response) {
                 Log.e("login","err:"+e);
+                showTips("网络出现异常，请稍后");
+            }
+
+            @Override
+            public void onErrResponse(int respCode, String response) {
+                super.onErrResponse(respCode, response);
+                Log.e("login","resp:"+response);
                 if(response!=null){
-                    UpdateErrModel err=gson.fromJson(response.body().toString(),UpdateErrModel.class);
+                    UpdateErrModel err=gson.fromJson(response,UpdateErrModel.class);
                     showTips(err.getMessage());
                 }else{
                     showTips("网络出现异常，请稍后");

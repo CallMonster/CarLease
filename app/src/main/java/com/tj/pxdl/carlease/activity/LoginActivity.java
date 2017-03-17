@@ -18,8 +18,12 @@ import com.tj.pxdl.carlease.base.BaseApplication;
 import com.tj.pxdl.carlease.base.BaseConfig;
 import com.tj.pxdl.carlease.model.user.err.LoginErrModel;
 import com.tj.pxdl.carlease.model.user.result.LoginResultModel;
+import com.tj.pxdl.carlease.utils.AppUtils;
 import com.tj.pxdl.carlease.utils.CheckUtil;
 import com.tj.pxdl.carlease.utils.PreferenceUtils;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -105,10 +109,9 @@ public class LoginActivity extends BaseActivity {
                 reqLogin(userStr,passStr);
                 break;
             case R.id.forgetPassBtn:
-                Intent aaa=new Intent(this,AuthActivity.class);
+                Intent aaa=new Intent(this,ForgetPwdActivity.class);
                 startActivity(aaa);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_from_left);
-
                 break;
         }
     }
@@ -116,11 +119,11 @@ public class LoginActivity extends BaseActivity {
     private void reqLogin(String username,String passStr){
         gson=BaseApplication.gson;
         OkHttpUtils.post().url(BaseConfig.USER_LOGIN_URL)
-                .addParams("client_id","client-id")
-                .addParams("client_secret:","client_secret")
-                .addParams("grant_type:","password")
-                .addParams("username",username)
-                .addParams("password",passStr)
+                .addParams("client_id","autorental-mobile")
+                .addParams("client_secret","autorental-web-api")
+                .addParams("grant_type","password")
+                .addParams("username","admin")
+                .addParams("password","123456")
                 .build().execute(new StringCallback() {
             @Override
             public void onAfter(int id) {
@@ -130,11 +133,18 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onError(Call call, Exception e, int id, Response response) {
-                Log.e("login","err:"+e);
-                if(response!=null){
-                    LoginErrModel err= gson.fromJson(response.body().toString(),LoginErrModel.class);
+                Log.e("login", "err:" + e + "--");
+                showTips("网络出现异常，请稍后");
+            }
+
+            @Override
+            public void onErrResponse(int respCode, String response) {
+                super.onErrResponse(respCode, response);
+                Log.e("login", "err-:" + response);
+                if (response != null) {
+                    LoginErrModel err = gson.fromJson(response, LoginErrModel.class);
                     showTips(err.getError_description());
-                }else{
+                } else {
                     showTips("网络出现异常，请稍后");
                 }
             }
@@ -156,5 +166,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
+
+
 
 }

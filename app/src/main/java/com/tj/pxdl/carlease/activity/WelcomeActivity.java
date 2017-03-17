@@ -54,8 +54,8 @@ public class WelcomeActivity extends BaseActivity {
         call = OkHttpUtils.post().url(BaseConfig.USER_FASTLOGIN_URL)
                 .tag(this)
                 .addParams("client_id","client-id")
-                .addParams("client_secret:","client_secret")
-                .addParams("grant_type:","refresh_token")
+                .addParams("client_secret","client_secret")
+                .addParams("grant_type","refresh_token")
                 .addParams("refresh_token",loginModel.getRefresh_token())
                 .build();
         call.execute(new StringCallback() {
