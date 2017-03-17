@@ -31,6 +31,15 @@ public abstract class Callback<T> {
     }
 
     /**
+     * UI Thread
+     * @param respCode 响应stateCode
+     * @param response 响应response
+     */
+    public void onErrResponse(int respCode,String response){
+
+    }
+
+    /**
      * if you parse reponse code in parseNetworkResponse, you should make this method return true.
      *
      * @param response

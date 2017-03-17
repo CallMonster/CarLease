@@ -20,6 +20,9 @@ android {
         versionName "1.0"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -37,7 +40,7 @@ android {
     lintOptions {
         quiet true
         abortOnError false
-        ignoreWarnings false
+        ignoreWarnings true
         checkReleaseBuilds false
         disable 'InnerClasses'
         ignore 'TypographyQuotes'

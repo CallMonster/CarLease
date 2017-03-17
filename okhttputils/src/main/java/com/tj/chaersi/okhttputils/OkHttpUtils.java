@@ -109,12 +109,14 @@ public class OkHttpUtils {
             public void onResponse(final Call call, final Response response) {
                 try {
                     if (call.isCanceled()) {
-                        sendFailResultCallback(call, new IOException("Canceled!"), finalCallback, id,response);
+                        sendErrResultCallBack(finalCallback,id,response.code(),response.body().string());
+//                        sendFailResultCallback(call, new IOException("Canceled!"), finalCallback, id,response);
                         return;
                     }
 
                     if (!finalCallback.validateReponse(response, id)) {
-                        sendFailResultCallback(call, new IOException("request failed , reponse's code is : " + response.code()), finalCallback, id,response);
+                        sendErrResultCallBack(finalCallback,id,response.code(),response.body().string());
+//                        sendFailResultCallback(call, new IOException("request failed , reponse's code is : " + response.code()), finalCallback, id,response);
                         return;
                     }
 
@@ -131,6 +133,16 @@ public class OkHttpUtils {
         });
     }
 
+    public void sendErrResultCallBack(final Callback callback,final int id, final int respCode, final String response){
+        if (callback == null) return;
+        mPlatform.execute(new Runnable() {
+            @Override
+            public void run() {
+                callback.onErrResponse(respCode,response);
+                callback.onAfter(id);
+            }
+        });
+    }
 
     public void sendFailResultCallback(final Call call, final Exception e, final Callback callback, final int id,final Response response) {
         if (callback == null) return;
