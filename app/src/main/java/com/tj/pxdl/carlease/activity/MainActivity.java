@@ -16,6 +16,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -51,6 +52,7 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.tj.pxdl.carlease.R;
 import com.tj.pxdl.carlease.base.BaseActivity;
 import com.tj.pxdl.carlease.utils.PermissionUtil;
+import com.tj.pxdl.carlease.utils.PreferenceUtils;
 import com.tj.pxdl.carlease.widget.scrollmenu.ScrollLayout;
 
 import butterknife.BindView;
@@ -77,10 +79,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.mMapView) MapView mMapView;
     private BaiduMap mBaiduMap;
 
+    private PreferenceUtils preference;
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        preference=new PreferenceUtils(this);
         if (Build.VERSION.SDK_INT >= 23) {
             showContacts(mMapView);
         } else {
@@ -93,10 +97,16 @@ public class MainActivity extends BaseActivity {
     public void onClickListener(View view) {
         switch (view.getId()) {
             case R.id.menuBtn:
-                Intent intent=new Intent(this,MenuActivity.class);
-//                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
+                if(TextUtils.isEmpty(preference.getToken())){
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    intent.putExtra("intent_flag",1);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
+                }else{
+                    Intent intent=new Intent(this,MenuActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
+                }
                 break;
             case R.id.topLayout:
                 break;
